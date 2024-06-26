@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #1a4d2e;
+  --secondary-color: #4f6f52;
+  --light-color: #e8dfca;
+}
+
+.button-shadow {
+  box-shadow: 3px 5px 3px rgba(26, 77, 46, 0.5);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-y: hidden;
+}
+
+body {
+  background-color: var(--light-color);
+}
+
+.image {
+  position: relative;
+  background-color: black;
+}
+
+.content {
+  isolation: isolate;
+}
+
+#More::before {
+  background-size: cover;
+  background-position: center;
+  background-image: url("./trees.jpeg");
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+}
+
+#Hobbys::before {
+  background-size: cover;
+  background-position: center;
+  background-image: url("./waterfall.webp");
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+}
+
+#GetStarted::before {
+  background-size: cover;
+  background-position: center;
+  background-image: url("./getstarted.jpeg");
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+}
+
+@media only screen and (max-width: 640px) {
+  html {
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
+    width: 100vw;
+    font-size: 20px;
+  }
+}
