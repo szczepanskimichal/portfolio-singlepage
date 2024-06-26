@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/portfolio-singlepage/static/css/main.993bdfb2.css",
+    "main.js": "/portfolio-singlepage/static/js/main.e0370788.js",
+    "static/media/waterfall.webp": "/portfolio-singlepage/static/media/waterfall.db0c082fde6f60affdd1.webp",
+    "static/media/trees.jpeg": "/portfolio-singlepage/static/media/trees.fdd3b0119bcce3a7ea41.jpeg",
+    "static/media/getstarted.jpeg": "/portfolio-singlepage/static/media/getstarted.a496cfd156cfca4aaaa4.jpeg",
+    "index.html": "/portfolio-singlepage/index.html",
+    "main.993bdfb2.css.map": "/portfolio-singlepage/static/css/main.993bdfb2.css.map",
+    "main.e0370788.js.map": "/portfolio-singlepage/static/js/main.e0370788.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.993bdfb2.css",
+    "static/js/main.e0370788.js"
+  ]
+}
