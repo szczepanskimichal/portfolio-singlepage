@@ -27,8 +27,12 @@ function App() {
         behavior: "smooth",
       });
 
-      if (currentSection.current === 6) {
+      if (currentSection.current === sectionsRef.current.length - 1) {
+        // Zmienione z 6 na sectionsRef.current.length - 1
         setBottom(true);
+        setTop(false);
+      } else {
+        setBottom(false);
         setTop(false);
       }
     }
@@ -104,7 +108,10 @@ function App() {
             <GetStarted />
           </div>
 
-          <div className="snap-center">
+          <div
+            className="snap-center"
+            ref={(el) => (sectionsRef.current[7] = el)}
+          >
             <Footer />
           </div>
         </div>
