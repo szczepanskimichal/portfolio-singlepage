@@ -27,12 +27,8 @@ function App() {
         behavior: "smooth",
       });
 
-      if (currentSection.current === sectionsRef.current.length - 1) {
-        // Zmienione z 6 na sectionsRef.current.length - 1
+      if (currentSection.current === 6) {
         setBottom(true);
-        setTop(false);
-      } else {
-        setBottom(false);
         setTop(false);
       }
     }
@@ -66,19 +62,19 @@ function App() {
         </div>
         <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
           <div
-            className="snap-center sm:h-screen"
+            className="snap-center h-screen"
             ref={(el) => (sectionsRef.current[0] = el)}
           >
             <Hero />
           </div>
           <div
-            className="snap-center sm:h-screen"
+            className="snap-center h-screen"
             ref={(el) => (sectionsRef.current[1] = el)}
           >
             <More />
           </div>
           <div
-            className="snap-center sm:h-screen"
+            className="snap-center h-screen"
             ref={(el) => (sectionsRef.current[2] = el)}
           >
             <Skills />
@@ -108,10 +104,7 @@ function App() {
             <GetStarted />
           </div>
 
-          <div
-            className="snap-center"
-            ref={(el) => (sectionsRef.current[7] = el)}
-          >
+          <div className="snap-center">
             <Footer />
           </div>
         </div>
