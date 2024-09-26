@@ -5,7 +5,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import toast, { Toaster } from "react-hot-toast"; // Importowanie hot-toast
-import axios from "axios"; // Importowanie axios
+import emailjs from "emailjs-com"; // Importowanie emailjs
 
 const GetStarted = () => {
   const { t } = useTranslation();
@@ -20,18 +20,25 @@ const GetStarted = () => {
   const sendEmail = (values, { setSubmitting, resetForm }) => {
     console.log("Sending email with values:", values); // Logowanie wartości
 
-    axios
-      .post("http://localhost:5000/send-email", values)
+    // Wysyłanie e-maila za pomocą EmailJS
+    emailjs
+      .send(
+        "service_ucdjc6e", // Wstaw swój SERVICE_ID
+        "MyFirstTemplate", // Wstaw swój TEMPLATE_ID
+        values,
+        "0ux7sK84Kacbu3-vK" // Wstaw swój USER_ID
+      )
       .then((response) => {
         console.log("Email sent successfully", response); // Logowanie sukcesu
         toast.success(t("email_sent_success")); // Powiadomienie o sukcesie
-        setSubmitting(false);
         resetForm(); // Reset the form after successful submission
       })
       .catch((error) => {
         console.error("Failed to send email", error); // Logowanie błędu
         toast.error(t("email_sent_error")); // Powiadomienie o błędzie
-        setSubmitting(false);
+      })
+      .finally(() => {
+        setSubmitting(false); // Ustawianie stanu przesyłania na false
       });
   };
 
