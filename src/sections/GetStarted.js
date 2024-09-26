@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
-import toast, { Toaster } from "react-hot-toast"; // Importowanie hot-toast
+import toast from "react-hot-toast"; // Importowanie hot-toast
 import emailjs from "emailjs-com"; // Importowanie emailjs
 
 const GetStarted = () => {
