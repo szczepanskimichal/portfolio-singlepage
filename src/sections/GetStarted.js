@@ -16,29 +16,52 @@ const GetStarted = () => {
     message: Yup.string().required(t("required_message")),
   });
 
+  // // Function to send email
+  // const sendEmail = (values, { setSubmitting, resetForm }) => {
+  //   console.log("Sending email with values:", values); // Logowanie wartości
+
+  //   // Wysyłanie e-maila za pomocą EmailJS
+  //   emailjs
+  //     .send(
+  //       "service_ucdjc6e", // Wstaw swój SERVICE_ID
+  //       "MyFirstTemplate", // Wstaw swój TEMPLATE_ID
+  //       values,
+  //       "0ux7sK84Kacbu3-vK" // Wstaw swój USER_ID
+  //     )
+  //     .then((response) => {
+  //       console.log("Email sent successfully", response); // Logowanie sukcesu
+  //       toast.success(t("email_sent_success")); // Powiadomienie o sukcesie
+  //       resetForm(); // Reset the form after successful submission
+  //     })
+  //     .catch((error) => {
+  //       console.error("Failed to send email", error); // Logowanie błędu
+  //       toast.error(t("email_sent_error")); // Powiadomienie o błędzie
+  //     })
+  //     .finally(() => {
+  //       setSubmitting(false); // Ustawianie stanu przesyłania na false
+  //     });
+  // };
   // Function to send email
   const sendEmail = (values, { setSubmitting, resetForm }) => {
     console.log("Sending email with values:", values); // Logowanie wartości
 
-    // Wysyłanie e-maila za pomocą EmailJS
-    emailjs
-      .send(
-        "service_ucdjc6e", // Wstaw swój SERVICE_ID
-        "MyFirstTemplate", // Wstaw swój TEMPLATE_ID
-        values,
-        "0ux7sK84Kacbu3-vK" // Wstaw swój USER_ID
-      )
+    axios
+      .post("http://localhost:5000/send-email", {
+        service_id: process.env.REACT_APP_SERVICE_ID,
+        template_id: process.env.REACT_APP_TEMPLATE_ID,
+        user_id: process.env.REACT_APP_USER_ID,
+        template_params: values,
+      })
       .then((response) => {
         console.log("Email sent successfully", response); // Logowanie sukcesu
         toast.success(t("email_sent_success")); // Powiadomienie o sukcesie
+        setSubmitting(false);
         resetForm(); // Reset the form after successful submission
       })
       .catch((error) => {
         console.error("Failed to send email", error); // Logowanie błędu
         toast.error(t("email_sent_error")); // Powiadomienie o błędzie
-      })
-      .finally(() => {
-        setSubmitting(false); // Ustawianie stanu przesyłania na false
+        setSubmitting(false);
       });
   };
 
