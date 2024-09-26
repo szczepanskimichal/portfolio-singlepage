@@ -42,7 +42,10 @@ const Skills = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex justify-center py-5 h-screen mt-10" id="Skills">
+    <div
+      className="flex justify-center py-5 sm:h-[100vh] mt-10 mb-10"
+      id="Skills"
+    >
       <div className="flex flex-col gap-y-[70px] justify-center items-center">
         <div className="relative flex justify-center items-center">
           <h1

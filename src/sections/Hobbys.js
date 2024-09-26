@@ -8,7 +8,7 @@ const Hobbys = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex justify-center sm:h-[100vh] py-10 image" id="Hobbys">
+    <div className="flex justify-center sm:h-[100vh]  image" id="Hobbys">
       <div className="flex flex-col mt-10 gap-y-[40px] justify-center items-center content">
         <h1 className="text-5xl text-light mt-10 font-bold whitespace-nowrap">
           {t("my_hobbys")}

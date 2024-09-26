@@ -62,19 +62,19 @@ function App() {
         </div>
         <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
           <div
-            className="snap-center h-screen"
+            className="snap-start sm:h-screen "
             ref={(el) => (sectionsRef.current[0] = el)}
           >
             <Hero />
           </div>
           <div
-            className="snap-center h-screen"
+            className="snap-center sm:h-screen "
             ref={(el) => (sectionsRef.current[1] = el)}
           >
             <More />
           </div>
           <div
-            className="snap-center h-screen"
+            className="snap-center sm:h-screen "
             ref={(el) => (sectionsRef.current[2] = el)}
           >
             <Skills />

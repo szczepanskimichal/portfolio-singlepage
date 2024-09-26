@@ -7,7 +7,8 @@ const More = () => {
 
   return (
     <div
-      className="h-screen py-10 flex justify-center items-center image mb-10"
+      className="flex justify-center sm:h-[100vh] image pb-10"
+      // className="h-screen py-10 flex justify-center items-center image mt-10"
       id="More"
     >
       <div className="p-5 sm:p-0 sm:w-[50%] flex flex-col gap-y-5 sm:gap-y-8 content">
