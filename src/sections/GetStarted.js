@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
-import toast from "react-hot-toast"; // Importowanie hot-toast
+import toast, { Toaster } from "react-hot-toast"; // Importowanie hot-toast
 import emailjs from "emailjs-com"; // Importowanie emailjs
 
 const GetStarted = () => {
@@ -16,51 +16,43 @@ const GetStarted = () => {
     message: Yup.string().required(t("required_message")),
   });
 
-  // // Function to send email
+  // Function to send email
   // const sendEmail = (values, { setSubmitting, resetForm }) => {
   //   console.log("Sending email with values:", values); // Logowanie wartości
+  //   console.log("Service ID:", process.env.REACT_APP_SERVICE_ID);
+  //   console.log("Template ID:", process.env.REACT_APP_TEMPLATE_ID);
+  //   console.log("User ID:", process.env.REACT_APP_USER_ID);
 
-  //   // Wysyłanie e-maila za pomocą EmailJS
-  //   emailjs
-  //     .send(
-  //       "service_ucdjc6e", // Wstaw swój SERVICE_ID
-  //       "MyFirstTemplate", // Wstaw swój TEMPLATE_ID
-  //       values,
-  //       "0ux7sK84Kacbu3-vK" // Wstaw swój USER_ID
-  //     )
-  //     .then((response) => {
-  //       console.log("Email sent successfully", response); // Logowanie sukcesu
-  //       toast.success(t("email_sent_success")); // Powiadomienie o sukcesie
-  //       resetForm(); // Reset the form after successful submission
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to send email", error); // Logowanie błędu
-  //       toast.error(t("email_sent_error")); // Powiadomienie o błędzie
-  //     })
-  //     .finally(() => {
-  //       setSubmitting(false); // Ustawianie stanu przesyłania na false
-  //     });
-  // };
-  // Function to send email
   const sendEmail = (values, { setSubmitting, resetForm }) => {
-    console.log("Sending email with values:", values); // Logowanie wartości
+    console.log("Sending email with values:", values);
 
-    axios
-      .post("http://localhost:5000/send-email", {
-        service_id: process.env.REACT_APP_SERVICE_ID,
-        template_id: process.env.REACT_APP_TEMPLATE_ID,
-        user_id: process.env.REACT_APP_USER_ID,
-        template_params: values,
-      })
+    emailjs
+      .send(
+        process.env.REACT_APP_SERVICE_ID,
+        process.env.REACT_APP_TEMPLATE_ID,
+        {
+          email: values.email,
+          message: values.message,
+        },
+        process.env.REACT_APP_USER_ID
+      )
       .then((response) => {
-        console.log("Email sent successfully", response); // Logowanie sukcesu
-        toast.success(t("email_sent_success")); // Powiadomienie o sukcesie
+        console.log("Email sent successfully", response);
+        toast.success(t("email_sent_success"));
         setSubmitting(false);
-        resetForm(); // Reset the form after successful submission
+        resetForm();
       })
       .catch((error) => {
-        console.error("Failed to send email", error); // Logowanie błędu
-        toast.error(t("email_sent_error")); // Powiadomienie o błędzie
+        console.error("Failed to send email:", error); // Detailed error logging
+        if (error.response) {
+          // If the error has a response, log that
+          console.error("EmailJS response error:", error.response);
+          toast.error(t("email_sent_error") + ": " + error.response.text); // More specific error message
+        } else {
+          // Otherwise log the error message
+          console.error("EmailJS error message:", error.message);
+          toast.error(t("email_sent_error") + ": " + error.message); // General error message
+        }
         setSubmitting(false);
       });
   };

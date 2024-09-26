@@ -12,7 +12,9 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Hobbys from "./sections/Hobbys";
 import Testimonials from "./sections/Testimonials";
 import GetStarted from "./sections/GetStarted";
-// import "./i18n";
+// import ErrorBoundary from "./components/ErrorBoundary"; // Import ErrorBoundary
+import ErrorBoundary from "./components/ErrorBoundar";
+import "./i18n";
 
 function App() {
   const [top, setTop] = useState(true);
@@ -27,7 +29,7 @@ function App() {
         behavior: "smooth",
       });
 
-      if (currentSection.current === 6) {
+      if (currentSection.current === sectionsRef.current.length - 1) {
         setBottom(true);
         setTop(false);
       }
@@ -97,14 +99,18 @@ function App() {
           >
             <Testimonials />
           </div>
+          <ErrorBoundary>
+            <div
+              className="snap-center h-screen"
+              ref={(el) => (sectionsRef.current[6] = el)}
+            >
+              <GetStarted />
+            </div>
+          </ErrorBoundary>
           <div
-            className="snap-center h-screen"
-            ref={(el) => (sectionsRef.current[6] = el)}
+            className="snap-center"
+            ref={(el) => (sectionsRef.current[7] = el)}
           >
-            <GetStarted />
-          </div>
-
-          <div className="snap-center">
             <Footer />
           </div>
         </div>
