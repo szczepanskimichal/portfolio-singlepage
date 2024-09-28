@@ -200,7 +200,7 @@ const GetStarted = () => {
                 <Field
                   name="from_name"
                   type="text"
-                  placeholder={t("your_name")}
+                  placeholder={t("Name")}
                   className="w-full border-2 border-secondary p-2 rounded-xl bg-white button-shadow focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition duration-150"
                   as={motion.input}
                   whileHover={{ scale: 1.03 }}
@@ -245,7 +245,7 @@ const GetStarted = () => {
                 <IoMdCreate className="w-10 h-10 text-light absolute top-1 left-[-60px]" />
                 <Field
                   name="message"
-                  placeholder={t("type_your_message")}
+                  placeholder={t("Message")}
                   className="w-full h-[200px] p-2 rounded-xl bg-white border-2 border-secondary button-shadow focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition duration-150"
                   as={motion.textarea}
                   whileHover={{ scale: 1.03 }}
