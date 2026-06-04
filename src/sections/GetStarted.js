@@ -139,10 +139,12 @@ import { motion } from "framer-motion";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
+import toast, { Toaster } from "react-hot-toast";
 
 const GetStarted = () => {
   const { t } = useTranslation();
-  const contactEmail = "michalszczepanski07@gmail.com";
+  const contactEmail =
+    process.env.REACT_APP_CONTACT_EMAIL || "michalszczepanski07@gmail.com";
 
   const validationSchema = Yup.object().shape({
     from_name: Yup.string().required(t("required_name")),
@@ -150,15 +152,36 @@ const GetStarted = () => {
     message: Yup.string().required(t("required_message")),
   });
 
-  const sendEmail = (values, { setSubmitting, resetForm }) => {
+  const fallbackToMailto = (values) => {
     const subject = encodeURIComponent(`Portfolio contact from ${values.from_name}`);
     const body = encodeURIComponent(
       `Name: ${values.from_name}\nEmail: ${values.email}\n\n${values.message}`
     );
 
     window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-    resetForm();
-    setSubmitting(false);
+  };
+
+  const sendEmail = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error("Contact API unavailable");
+      }
+
+      toast.success(t("email_sent_success"));
+      resetForm();
+    } catch (error) {
+      fallbackToMailto(values);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -166,6 +189,8 @@ const GetStarted = () => {
       className="flex justify-center items-center h-screen image"
       id="GetStarted"
     >
+      <Toaster position="top-center" reverseOrder={false} />
+
       <Formik
         initialValues={{ from_name: "", email: "", message: "" }}
         validationSchema={validationSchema}
